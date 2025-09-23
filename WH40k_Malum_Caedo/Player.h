@@ -24,12 +24,9 @@ public:
 	void ViewStatus();
 	void SwapWeapon();
 	bool IsAlive();
-	void TakeDamage(int InDamage);
+	void TakeDamagePlayer(int InDamage);
 	int BoltGunShot(int EnemyHealth);
 	int ChainSwordAttack(int EnemyHealth);
-	void ArmBrokenDebuff(); // 팔, 다리 나갔을때 처리를 어케하지 <- 해결안됨
-	void LegBrokenDebuff();
-	void BleedingDebuff();
 	
 
 	
@@ -44,7 +41,6 @@ protected:
 	unsigned int LeftArmPlayer = 70;		// 왼팔 체력
 	unsigned int RightLegPlayer = 70;		// 오른다리 체력
 	unsigned int LeftLegPlayer = 70;		// 왼다리 체력
-	bool IsBleeding = 0;					// 출혈상태냐 아니냐
-	WeaponType MyWeapon;
+	WeaponType MyWeapon;					// 무기 뭐 끼고있냐
 };
 

@@ -124,14 +124,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boyz.cpp" />
-    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="WH40k_Malum_Caedo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boyz.h" />
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="WH40k_Malum_Caedo.h" />
   </ItemGroup>
