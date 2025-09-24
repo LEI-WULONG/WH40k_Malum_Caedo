@@ -1,13 +1,13 @@
-#include "Boyz.h"
+#include "Warboss.h"
 
-int Boyz::Attack(Character& Target)
+int Warboss::Attack(Character& Target)
 {
-	int Damage = rand() % 11 + 20;
+	int Damage = rand() % 10 + 35;
 	Target.TakeDamage(Damage, BodyPart::Head);
 	return Damage;
 }
 
-void Boyz::TakeDamage(int Damage, BodyPart Part)
+void Warboss::TakeDamage(int Damage, BodyPart Part)
 {
     unsigned int* PartHP = nullptr;
 
@@ -30,13 +30,13 @@ void Boyz::TakeDamage(int Damage, BodyPart Part)
         PartHP = &LeftLeg;
     }
 
-    if (PartHP) 
+    if (PartHP)
     {
-        if (*PartHP > static_cast<unsigned int>(Damage)) 
+        if (*PartHP > static_cast<unsigned int>(Damage))
         {
             *PartHP -= Damage;
         }
-        else 
+        else
         {
             *PartHP = 0;
         }

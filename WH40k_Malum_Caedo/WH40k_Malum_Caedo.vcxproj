@@ -124,15 +124,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boyz.cpp" />
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Nob.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Warboss.cpp" />
     <ClCompile Include="WH40k_Malum_Caedo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boyz.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Nob.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Warboss.h" />
     <ClInclude Include="WH40k_Malum_Caedo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

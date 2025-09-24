@@ -1,21 +1,20 @@
 #pragma once
-#include "Enemy.h"
-#include "Player.h"
+#include "Character.h"
 
 class Boyz :
-    public Enemy
+    public Character
 {
 public:
-	virtual void Attack(Player& player) override;
+	int Attack(Character& Target) override;
+	void TakeDamage(int Damage, BodyPart Part) override;
 
 protected:
 	std::string Name = "옼스 보이즈";
-	int AttackPowerEnemy = 0; // 함수 안에서 랜덤
-	unsigned int HeadHealth = 35;
-	unsigned int ThoraxHealth = 80;
-	unsigned int RightArmHealth = 60;
-	unsigned int LeftArmHealth = 60;
-	unsigned int RightLegHealth = 60;
-	unsigned int LeftLegHealth = 60;
+	unsigned int Head = 35;
+	unsigned int Thorax = 80;
+	unsigned int RightArm = 60;
+	unsigned int LeftArm = 60;
+	unsigned int RightLeg = 60;
+	unsigned int LeftLeg = 60;
 };
 
