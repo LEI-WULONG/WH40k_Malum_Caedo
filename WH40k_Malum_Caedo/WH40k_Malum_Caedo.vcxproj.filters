@@ -36,6 +36,9 @@
     <ClCompile Include="Warboss.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="RougeTrader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WH40k_Malum_Caedo.h">
@@ -54,6 +57,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Warboss.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="RougeTrader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

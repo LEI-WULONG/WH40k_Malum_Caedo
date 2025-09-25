@@ -73,6 +73,11 @@ void Player::SwapWeapon()
 	}
 }
 
+bool Player::BuyMed(RougeTrader& Trader)
+{
+	return Trader.SellMed(*this);
+}
+
 bool Player::IsAlive() const
 {
 	// 머리, 몸통, 두 팔, 두 다리 중 하나라도 사망 조건이면 false
