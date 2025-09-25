@@ -2,6 +2,7 @@
 #include "Nob.h"
 #include "Boyz.h"
 #include "Warboss.h"
+#include <thread>
 
 GameManager::GameManager()
 	: CurrentStage(1),                // 1스테이지로 초기화
@@ -33,6 +34,47 @@ void GameManager::StartGame()
 		Trader = nullptr;
 	}
 
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("Mdolllllcccccc::::::;;;;;;,,,,,'''''.cKMMMMMMMMMMMMMMMMMMMMMMNc            .............''',,,,,;;;:oM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("Md.                                .;xNMNXXXNNWMMMMMWNNNNWWMMW0o,                                 .cOM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MW0c,,;;;;::::::;;;;,,,'''.....   ;OWMMXl;;.,ckNMMMMW0o:,,:xXWMMNo.    ..........'',,,;::cccclllldKWMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMWNOlc::;,,''..............    :XMMXd:col;,,'cONKko,.,''cc;lKMMX;    .......         .....'':kNMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMXd'    ..';::c::;;,'..      lNMMNkxXWMNO;  :kc.. 'okKNXkkNMWO.   .''......'',,,,,'...  .:kNMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMXkxkxxdol:;'.     .''..   .l0NWNX0ko::c:cc,cxolc,.,codddo:.     .'',,,'.   ..',,;:cdk0WMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMXo.      ..;ccc;'....    .'''..     :d' .cdl               ...   .';:ccc;..   .oKMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMNk;.':lxxdl;.  .,;.            .. .:,    ,l. ''.         . .'::,.    .;coodoxKWMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMWXNXx:.    'll,. .'. .,... 'c'  ;;      :c..lx,.'. ..  ';.  'ldo;.    .lXMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMWXNXx:.    'll,. .'. .,... 'c'  ;;      :c..lx,.'. ..  ';.  'ldo;.    .lXMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMNOx0Oc.  .ol. .lc .d00x' 'c.        'l' ,OXKl  .c.  .dx,   .lXWWMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMMMMWKo,.ckl. .ld,,dNMMMNOd'          ;xOXWMMXxl:dd.  .dKd;cxKWMMMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMNXNKdc:dX00NMMMMMMWk;          .xWMMMMMMMWWN0xxxONMWMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWx;cc.       ':;dNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNNXx..cc'.     ..c:.l0KKKWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0c;,. :o:,'. .'..'l0: .''lNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXkc...'k0o,. .:;oKKo..,;ckWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWd'l0kOWMWk..cOKWMWKxdx:,xWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNl.dWMMMMMWOxXMMMMMMMNkc:xWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
 	printf("\n=== WH40k Malum Caedo ===\n");
 	printf("게임을 시작합니다!\n");
 	ShowMainMenu(); // 첫 선택지(메인 메뉴) 호출
@@ -374,23 +416,61 @@ void GameManager::SetupEnemy(int StageNum)
         Enemy = nullptr;
     }
 
+    int RandomDial = rand() % 3 + 1;
+
     if (StageNum == 8)
     {
         Enemy = new Nob();
         printf("\n===== 전투 시작! =====\n");
-        printf("\n중간보스 옼스 놉이 등장했습니다!\n");
+        printf("\n중간보스 옼스 놉이 등장했습니다!");
+        if (RandomDial == 1)
+        {
+            printf("\n옼스 놉 : 나 다 부순다! 쑤뻬이쓰 마륀 도망 못해!!\n");
+        }
+        if (RandomDial == 2)
+        {
+            printf("\n옼스 놉 : 나 먼저 죽인다! 다른 깃들 지켜봐라! 쑤뻬이쓰 마륀!!\n");
+        }
+        if (RandomDial == 3)
+        {
+            printf("\n옼스 놉 : 나 노브, 너 죽는다! 와아아!! 쑤뻬이쓰 마륀!!\n");
+        }
     }
     else if (StageNum == 12)
     {
         Enemy = new Warboss();
         printf("\n===== 전투 시작! =====\n");
-        printf("\n최종보스 옼스 워뽀쓰가 등장했습니다!\n");
+        printf("\n최종보스 옼스 워뽀쓰가 등장했습니다!");
+        if (RandomDial == 1)
+        {
+            printf("\n옼스 워뽀쓰 : 제일 크다, 제일 세다! 아무도 못 막는다! 쑤뻬이쓰 마륀!!\n");
+        }
+        if (RandomDial == 2)
+        {
+            printf("\n옼스 워뽀쓰 : 나 워보스! 쑤뻬이쓰 마륀 먼저 죽는다!!\n");
+        }
+        if (RandomDial == 3)
+        {
+            printf("\n옼스 워뽀쓰 : 쑤뻬이쓰 마륀, 너 이길 거라? 와아아!! 안 된다!!\n");
+        }
     }
     else if (StageNum >= 1)
     {
         Enemy = new Boyz();
         printf("\n===== 전투 시작! =====\n");
-        printf("\n적 옼스 보이즈가 등장했습니다!\n");
+        printf("\n적 옼스 보이즈가 등장했습니다!");
+        if (RandomDial == 1)
+        {
+            printf("\n옼스 보이즈 : 나 부순다! 쑤뻬이쓰 마륀!!\n");
+        }
+        if (RandomDial == 2)
+        {
+            printf("\n옼스 보이즈 : 쑤뻬이쓰 마륀, 너 오크 못 이긴다!!\n");
+        }
+        if (RandomDial == 3)
+        {
+            printf("\n옼스 보이즈 : 너 쏜다? 나도 쏜다!! 쑤뻬이쓰 마륀!!\n");
+        }
     }
 }
 
