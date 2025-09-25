@@ -54,25 +54,25 @@ void Warboss::ViewStatus() const
     printf("¿À¸¥ÆÈ: %d\n", RightArm);
     printf("¿ÞÆÈ: %d\n", LeftArm);
     printf("¿À¸¥´Ù¸®: %d\n", RightLeg);
-    printf("¿Þ´Ù¸®: %d\n", LeftLeg);
+    printf("¿Þ´Ù¸®: %d\n\n", LeftLeg);
 }
 
 bool Warboss::IsAlive() const
 {
     // ¸Ó¸®, ¸öÅë, µÎ ÆÈ, µÎ ´Ù¸® Áß ÇÏ³ª¶óµµ »ç¸Á Á¶°ÇÀÌ¸é false
-    if (Head == 0)
+    if (Head < 0)
     {
         return false;
     }
-    if (Thorax == 0)
+    if (Thorax < 0)
     {
         return false;
     }
-    if (RightArm == 0 && LeftArm == 0)
+    if (RightArm < 0 && LeftArm < 0)
     {
         return false;
     }
-    if (RightLeg == 0 && LeftLeg == 0)
+    if (RightLeg < 0 && LeftLeg < 0)
     {
         return false;
     }

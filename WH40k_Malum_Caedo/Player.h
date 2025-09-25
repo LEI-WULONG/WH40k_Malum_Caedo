@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include "Character.h"
-#include "RougeTrader.h"
 
+class RougeTrader; // 전방 선언
 enum class WeaponType
 {
 	Bolter = 1,
@@ -22,8 +22,8 @@ public:
 	// 고유 함수
     void UsingMed();
 	void SwapWeapon();
-	WeaponType MyWeapon;					// 무기 뭐 끼고있냐
-	bool BuyMed(RougeTrader& Trader);
+	WeaponType MyWeapon = WeaponType::Bolter;					// 무기 뭐 끼고있냐
+	bool BuyMed(RougeTrader& Trader);	
 
 	// 상인 상호작용을 위해 public으로 뺄수밖에 없었음
 	unsigned int Med = 0;					// 메디카에 소지 갯수, 2개가 최대

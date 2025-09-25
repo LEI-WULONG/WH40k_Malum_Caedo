@@ -4,7 +4,7 @@
 #include "Warboss.h"
 
 GameManager::GameManager()
-	: CurrentStage(1),                // 1스테이지로 초기화
+	: CurrentStage(0),                // 1스테이지로 초기화
 	State(GameState::MainMenu),     // 메인 메뉴 상태로 초기화
 	Enemy(nullptr),                 // 적 포인터 초기화
 	Trader(nullptr)                 // 상인 포인터 초기화
@@ -13,7 +13,7 @@ GameManager::GameManager()
 }
 
 void GameManager::StartGame() {
-	CurrentStage = 1;               // 스테이지 1로 초기화
+	CurrentStage = 0;               // 스테이지 1로 초기화
 	State = GameState::MainMenu;    // 메인 메뉴 상태로 초기화
 
 	// 플레이어 초기화 (필요하다면 이름, 무기 등 추가 설정)
@@ -92,8 +92,8 @@ void GameManager::StartBattle()
 		// 플레이어 행동 선택지
 		ShowBattleMenu();
 
-		// 적의 공격 (플레이어가 살아있을 때만)
-		if (Enemy->IsAlive() && player.IsAlive()) 
+		// 적이 공격하기 전에 적이 살아있는지 다시 검사
+		if (Enemy && Enemy->IsAlive() && player.IsAlive()) 
 		{
 			Enemy->Attack(player);
 		}
