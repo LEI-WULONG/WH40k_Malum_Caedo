@@ -41,40 +41,42 @@ void Nob::TakeDamage(int Damage, BodyPart Part)
 			*PartHP = 0;
 		}
 
-		printf("%s가 %s 부위에 %d의 피해를 입음! (남은 체력: %u)\n",
+		printf("%s이 %s 부위에 %d의 피해를 입음! (남은 체력: %u)\n",
 			Name.c_str(), Character::BodyPartToString(Part), Damage, *PartHP);
 	}
 }
 
 void Nob::ViewStatus() const
 {
+	printf("------ 적의 체력 ------\n");
 	printf("적 이름: %s\n", Name.c_str());
 	printf("머리: %d\n", Head);
 	printf("몸통: %d\n", Thorax);
-	printf("오른팔: %d\n", RightArm);
+	printf("오른팔: %d / ", RightArm);
 	printf("왼팔: %d\n", LeftArm);
-	printf("오른다리: %d\n", RightLeg);
+	printf("오른다리: %d / ", RightLeg);
 	printf("왼다리: %d\n\n", LeftLeg);
 }
 
 bool Nob::IsAlive() const
 {
 	// 머리, 몸통, 두 팔, 두 다리 중 하나라도 사망 조건이면 false
-	if (Head < 0)
+	if (Head <= 0)
 	{
 		return false;
 	}
-	if (Thorax < 0)
+	if (Thorax <= 0)
 	{
 		return false;
 	}
-	if (RightArm < 0 && LeftArm < 0)
+	if ((RightArm <= 0) && (LeftArm <= 0))
 	{
 		return false;
 	}
-	if (RightLeg < 0 && LeftLeg < 0)
+	if ((RightLeg <= 0) && (LeftLeg <= 0))
 	{
 		return false;
 	}
+
 	return true;
 }

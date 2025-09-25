@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "RougeTrader.h"
+#include <thread>
 
 void Player::UsingMed()
 {
@@ -16,7 +17,7 @@ void Player::UsingMed()
 	else
 	{
 		Med--;
-		printf("메디카에를 사용했습니다. 보유 메디카에 : %d / %d\n", Med, MaxMed);
+		printf("\n메디카에를 사용했습니다. 보유 메디카에 : %d / %d\n", Med, MaxMed);
 		Head = MaxHead;
 		Thorax = MaxThorax;
 		RightArm = MaxArm;
@@ -55,9 +56,9 @@ void Player::ViewStatus() const
 		HealthState = "최상";
 	}
 
-	printf("이름 : %s\n소지금 : 머리통 %d개\n장착 무기 : %s\n----- 체력 -----\n",
+	printf("\n------ 나의 정보 ------\n이름 : %s\n소지금 : 머리통 %d개\n장착 무기 : %s\n",
 		Name.c_str(), OaksHead, weaponName);
-	printf("머리 : %d\n몸통 : %d\n오른팔 : %d\n왼팔 : %d\n오른다리 : %d\n왼다리 : %d\n",
+	printf("머리 : %d\n몸통 : %d\n오른팔 : %d / 왼팔 : %d\n오른다리 : %d / 왼다리 : %d\n",
 		Head, Thorax, RightArm, LeftArm, RightLeg, LeftLeg);
 	printf("최종 건강 상태 : %s\n\n", HealthState);
 }
@@ -82,19 +83,19 @@ bool Player::BuyMed(RougeTrader& Trader)
 bool Player::IsAlive() const
 {
 	// 머리, 몸통, 두 팔, 두 다리 중 하나라도 사망 조건이면 false
-	if (Head < 0) 
+	if (Head <= 0)
 	{
 		return false;
 	}
-	if (Thorax < 0) 
+	if (Thorax <= 0)
 	{
 		return false;
 	}
-	if (RightArm < 0 && LeftArm < 0) 
+	if ((RightArm <= 0) && (LeftArm <= 0))
 	{
 		return false;
 	}
-	if (RightLeg < 0 && LeftLeg < 0) 
+	if ((RightLeg <= 0) && (LeftLeg <= 0))
 	{
 		return false;
 	}
@@ -119,8 +120,9 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		if (Head < 0) 
 		{ 
 			Head = 0; 
+
 		}
-		printf("\n적에게 머리를 맞았습니다!\n머리 체력 : %d / 45\n\n", Head);
+		printf("\n적에게 머리를 맞았습니다!\n머리 체력 : %d / 45 피해량 : %d\n\n", Head, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::Thorax))
 	{
@@ -129,7 +131,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			Thorax = 0; 
 		}
-		printf("\n적에게 몸통을 맞았습니다!\n몸통 체력 : %d / 90\n\n", Thorax);
+		printf("\n적에게 몸통을 맞았습니다!\n몸통 체력 : %d / 90 피해량 : %d\n\n", Thorax, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::RightArm))
 	{
@@ -138,7 +140,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			RightArm = 0; 
 		}
-		printf("\n적에게 오른팔을 맞았습니다!\n오른팔 체력 : %d / 70\n\n", RightArm);
+		printf("\n적에게 오른팔을 맞았습니다!\n오른팔 체력 : %d / 70 피해량 : %d\n\n", RightArm, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::LeftArm))
 	{
@@ -147,7 +149,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			LeftArm = 0; 
 		}
-		printf("\n적에게 왼팔을 맞았습니다!\n왼팔 체력 : %d / 70\n\n", LeftArm);
+		printf("\n적에게 왼팔을 맞았습니다!\n왼팔 체력 : %d / 70 피해량 : %d\n\n", LeftArm, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::RightLeg))
 	{
@@ -156,7 +158,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			RightLeg = 0; 
 		}
-		printf("\n적에게 오른다리를 맞았습니다!\n오른다리 체력 : %d / 70\n\n", RightLeg);
+		printf("\n적에게 오른다리를 맞았습니다!\n오른다리 체력 : %d / 70 피해량 : %d\n\n", RightLeg, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::LeftLeg))
 	{
@@ -165,17 +167,15 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			LeftLeg = 0; 
 		}
-		printf("\n적에게 왼다리를 맞았습니다!\n왼다리 체력 : %d / 70\n\n", LeftLeg);
+		printf("\n적에게 왼다리를 맞았습니다!\n왼다리 체력 : %d / 70 피해량 : %d\n\n", LeftLeg, Damage);
 	}
 	else
 	{
 		printf("버그인듯\n");
 	}
+	
+	// 사망은 게임 매니저에서 구현
 
-	if (!IsAlive()) 
-	{
-		printf("\n플레이어가 사망했습니다!\n");
-	}
 }
 
 int Player::Attack(Character& Target)
@@ -186,11 +186,11 @@ int Player::Attack(Character& Target)
 		for (int i = 0; i < 3; i++)
 		{
 			int Damage = rand() % 21 + 20;
-			printf("\n탕! %d의 데미지\n", Damage);
+			printf("\n탕! %d의 데미지", Damage);
 			int Part = rand() % static_cast<int>(BodyPart::NumParts);
 			Target.TakeDamage(Damage, static_cast<Character::BodyPart>(Part));
 			TotalDamage += Damage;
-			
+			std::this_thread::sleep_for(std::chrono::milliseconds(200)); // 감성
 		}
 	}
 	else if (MyWeapon == WeaponType::ChainSword)
@@ -199,10 +199,10 @@ int Player::Attack(Character& Target)
 		for (int i = 0; i < 5; i++)
 		{
 			int Damage = rand() % 11 + 10;
-			printf("\n가가가각! %d의 데미지\n", Damage);
+			printf("\n가가가각! %d의 데미지", Damage);
 			Target.TakeDamage(Damage, static_cast<Character::BodyPart>(Part));
 			TotalDamage += Damage;
-			
+			std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 감성
 		}
 	}
 	else

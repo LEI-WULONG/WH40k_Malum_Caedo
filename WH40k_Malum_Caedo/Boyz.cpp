@@ -3,7 +3,7 @@
 int Boyz::Attack(Character& Target)
 {
 	int Damage = rand() % 11 + 20;
-	Target.TakeDamage(Damage, BodyPart::Head);
+	Target.TakeDamage(Damage, BodyPart::Thorax);
 	return Damage;
 }
 
@@ -48,12 +48,13 @@ void Boyz::TakeDamage(int Damage, BodyPart Part)
 
 void Boyz::ViewStatus() const
 {
+    printf("------ 적의 체력 ------\n");
     printf("적 이름: %s\n", Name.c_str());
     printf("머리: %d\n", Head);
     printf("몸통: %d\n", Thorax);
-    printf("오른팔: %d\n", RightArm);
+    printf("오른팔: %d / ", RightArm);
     printf("왼팔: %d\n", LeftArm);
-    printf("오른다리: %d\n", RightLeg);
+    printf("오른다리: %d / ", RightLeg);
     printf("왼다리: %d\n\n", LeftLeg);
 }
 

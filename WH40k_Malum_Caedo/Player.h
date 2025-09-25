@@ -31,11 +31,11 @@ public:
 
 protected:
 	std::string Name = "나쁜놈다죽어 해병";	// 말룸 카에도
-	unsigned int Head = 45;					// 머리 체력
-	unsigned int Thorax = 90;				// 몸통 체력
-	unsigned int RightArm = 70;				// 오른팔 체력
-	unsigned int LeftArm = 70;				// 왼팔 체력
-	unsigned int RightLeg = 70;				// 오른다리 체력
-	unsigned int LeftLeg = 70;				// 왼다리 체력
+	int Head = 45;					// 머리 체력
+	int Thorax = 90;				// 몸통 체력
+	int RightArm = 70;				// 오른팔 체력
+	int LeftArm = 70;				// 왼팔 체력
+	int RightLeg = 70;				// 오른다리 체력
+	int LeftLeg = 70;				// 왼다리 체력
 };
 

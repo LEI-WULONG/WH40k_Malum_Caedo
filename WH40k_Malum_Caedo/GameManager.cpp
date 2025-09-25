@@ -4,16 +4,18 @@
 #include "Warboss.h"
 
 GameManager::GameManager()
-	: CurrentStage(0),                // 1스테이지로 초기화
+	: CurrentStage(1),                // 1스테이지로 초기화
 	State(GameState::MainMenu),     // 메인 메뉴 상태로 초기화
 	Enemy(nullptr),                 // 적 포인터 초기화
 	Trader(nullptr)                 // 상인 포인터 초기화
 {
-	printf("[GameManager] 현재 스테이지 : %d\n", CurrentStage);
+	printf("[GameManager] : 황제님이 가호하시길.\n");
 }
 
-void GameManager::StartGame() {
-	CurrentStage = 0;               // 스테이지 1로 초기화
+void GameManager::StartGame() 
+{
+	CurrentStage = 1;       
+    // 스테이지 1로 초기화
 	State = GameState::MainMenu;    // 메인 메뉴 상태로 초기화
 
 	// 플레이어 초기화 (필요하다면 이름, 무기 등 추가 설정)
@@ -31,10 +33,7 @@ void GameManager::StartGame() {
 		Trader = nullptr;
 	}
 
-	// 첫 스테이지 초기화
-	InitStage(CurrentStage);
-
-	printf("=== WH40k Malum Caedo ===\n");
+	printf("\n=== WH40k Malum Caedo ===\n");
 	printf("게임을 시작합니다!\n");
 	ShowMainMenu(); // 첫 선택지(메인 메뉴) 호출
 }
@@ -54,6 +53,7 @@ void GameManager::ShowMainMenu()
 		std::cin >> Choice;
 
 		if (Choice == 1) {
+            InitStage(CurrentStage); // 여기서 첫 스테이지 초기화
 			StartBattle();
 			return;
 		}
@@ -73,12 +73,7 @@ void GameManager::ShowMainMenu()
 void GameManager::StartBattle()
 {
 	State = GameState::InBattle;
-
-	printf("\n===== 전투 시작! =====\n");
-	if (Enemy) 
-	{
-		Enemy->ViewStatus();
-	}
+	
 	player.ViewStatus();
 
 	// 전투 루프: 플레이어와 적이 모두 살아있을 때 반복
@@ -132,11 +127,9 @@ void GameManager::ShowBattleMenu()
         }
         else if (Choice == 2) {
             UseMedi();
-            ValidInput = true;
         }
         else if (Choice == 3) {
             ChangeWeapon();
-            ValidInput = true;
         }
         else if (Choice == 4) {
             ShowPlayerInfo();
@@ -156,18 +149,18 @@ void GameManager::EndBattle(bool Victory)
         if (IsVictoryConditionMet()) 
 		{
             GameVictory(); // 게임 클리어
-        } else 
+        } 
+        else 
 		{
-            MoveToNextStage(); // 다음 스테이지로 이동
+            ShowAfterBattleMenu(); // 전투 후 선택지 메뉴 호출
         }
     } 
 	else 
 	{
-        printf("\n패배했습니다...\n");
         GameDefeat(); // 게임 오버 처리
     }
 
-    ShowAfterBattleMenu(); // 전투 후 선택지 메뉴 호출
+    
 }
 
 void GameManager::ShowAfterBattleMenu()
@@ -180,9 +173,10 @@ void GameManager::ShowAfterBattleMenu()
         printf("\n===== 전투 후 메뉴 =====\n");
         printf("1. 내 정보 보기\n");
         printf("2. 메디카에 사용\n");
-        printf("3. 다음 스테이지 진행\n");
+        printf("3. 다음 스테이지 진행 (다음 스테이지 : %d)\n", (CurrentStage + 1));
+		printf("4. 무기 교체 (볼터/체인소드)\n");
         printf("선택(번호 입력): ");
-
+    
         std::cin >> Choice;
 
         if (Choice == 1)
@@ -198,6 +192,10 @@ void GameManager::ShowAfterBattleMenu()
             ExitMenu = true;
             MoveToNextStage();
         }
+        else if (Choice == 4)
+        {
+            ChangeWeapon();
+		}
         else
         {
             printf("올바른 번호를 입력하세요.\n");
@@ -255,7 +253,7 @@ void GameManager::ShowTraderMenu()
     {
         printf("1. 메디카에 구매\n");
         printf("2. 내 정보 보기\n");
-        printf("3. 다음 스테이지로 이동\n");
+        printf("3. 다음 스테이지로 이동 (다음 스테이지 : %d)\n", (CurrentStage + 1));
         printf("선택(번호 입력): ");
 
         std::cin >> Choice;
@@ -290,11 +288,13 @@ void GameManager::ChangeWeapon()
     player.SwapWeapon();
     if (player.MyWeapon == WeaponType::Bolter)
     {
-        printf("무기를 볼터로 교체했습니다.\n");
+        printf("\n무기를 볼터로 교체했습니다.\n");
+		printf("볼터는 원거리 무기로, 3연발 사격이 가능하고, 20~40의 피해를 줍니다.\n");
     }
     else if (player.MyWeapon == WeaponType::ChainSword)
     {
-        printf("무기를 체인소드로 교체했습니다.\n");
+        printf("\n무기를 체인소드로 교체했습니다.\n");
+		printf("체인소드는 근접 무기로, 5번에 걸쳐 10~20의 피해를 줍니다.\n");
     }
 }
 
@@ -368,31 +368,29 @@ void GameManager::InitStage(int StageNum)
 
 void GameManager::SetupEnemy(int StageNum)
 {
-    // 기존 적 객체 삭제
     if (Enemy != nullptr)
     {
         delete Enemy;
         Enemy = nullptr;
     }
 
-    // 스테이지별 적 배치
     if (StageNum == 8)
     {
-        // 놉(중간보스) 생성
         Enemy = new Nob();
-        printf("중간보스 놉이 등장했습니다!\n");
+        printf("\n===== 전투 시작! =====\n");
+        printf("\n중간보스 옼스 놉이 등장했습니다!\n");
     }
     else if (StageNum == 12)
     {
-        // 워뽀쓰(최종보스) 생성
         Enemy = new Warboss();
-        printf("최종보스 워뽀쓰가 등장했습니다!\n");
+        printf("\n===== 전투 시작! =====\n");
+        printf("\n최종보스 옼스 워뽀쓰가 등장했습니다!\n");
     }
-    else
+    else if (StageNum >= 1)
     {
-        // 일반 적(Boyz) 생성
         Enemy = new Boyz();
-        printf("적 오크 Boyz가 등장했습니다!\n");
+        printf("\n===== 전투 시작! =====\n");
+        printf("\n적 옼스 보이즈가 등장했습니다!\n");
     }
 }
 
@@ -420,6 +418,6 @@ void GameManager::GiveLoot()
     if (CurrentStage != 12 && CurrentStage != 3 && CurrentStage != 6 && CurrentStage != 9)
     {
         player.OaksHead++;
-        printf("전리품: 옼스 머리통 1개를 획득했습니다!\n");
+        printf("전리품: 옼스 머리통 1개를 획득했습니다!\n\n");
     }
 }
