@@ -7,6 +7,8 @@ class Nob :
 public:
 	int Attack(Character& Target) override;
 	void TakeDamage(int Damage, BodyPart Part) override;
+	void ViewStatus() const override;
+	bool IsAlive() const override;
 
 protected:
 	std::string Name = "ž±½º ³ñ";

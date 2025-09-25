@@ -1,11 +1,14 @@
 #pragma once
 #include "Character.h"
+
 class Warboss :
     public Character
 {
 public:
 	int Attack(Character& Target) override;
 	void TakeDamage(int Damage, BodyPart Part) override;
+	void ViewStatus() const override;
+	bool IsAlive() const override;
 
 protected:
 	std::string Name = "ž±½º ¿ö»Ç¾²";

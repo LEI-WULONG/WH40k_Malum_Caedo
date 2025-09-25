@@ -1,5 +1,7 @@
 #include "GameManager.h"
-#include <iostream>
+#include "Nob.h"
+#include "Boyz.h"
+#include "Warboss.h"
 
 GameManager::GameManager()
 	: CurrentStage(1),                // 1스테이지로 초기화
@@ -7,7 +9,7 @@ GameManager::GameManager()
 	Enemy(nullptr),                 // 적 포인터 초기화
 	Trader(nullptr)                 // 상인 포인터 초기화
 {
-	printf("[GameManager] 현재 스테이지 : \n", CurrentStage);
+	printf("[GameManager] 현재 스테이지 : %d\n", CurrentStage);
 }
 
 void GameManager::StartGame() {
@@ -37,103 +39,387 @@ void GameManager::StartGame() {
 	ShowMainMenu(); // 첫 선택지(메인 메뉴) 호출
 }
 
-void GameManager::ShowMainMenu()
+void GameManager::ShowMainMenu() 
 {
+	State = GameState::MainMenu;
+	int Choice = 0;
+
+	while (true) {
+		printf("\n===== 메인 메뉴 =====\n");
+		printf("1. 전투 시작\n");
+		printf("2. 내 정보 보기\n");
+		printf("3. 무기 교체 (볼터/체인소드)\n");
+		printf("선택(번호 입력): ");
+
+		std::cin >> Choice;
+
+		if (Choice == 1) {
+			StartBattle();
+			return;
+		}
+		else if (Choice == 2) {
+			ShowPlayerInfo();
+		}
+		else if (Choice == 3) {
+			ChangeWeapon();
+		}
+		else {
+			printf("올바른 번호를 입력하세요.\n");
+		}
+	}
 }
+
 
 void GameManager::StartBattle()
 {
+	State = GameState::InBattle;
+
+	printf("\n===== 전투 시작! =====\n");
+	if (Enemy) 
+	{
+		Enemy->ViewStatus();
+	}
+	player.ViewStatus();
+
+	// 전투 루프: 플레이어와 적이 모두 살아있을 때 반복
+	while (player.IsAlive() && Enemy && Enemy->IsAlive()) {
+		// 매 턴 적 체력 표시
+		if (Enemy) 
+		{
+			Enemy->ViewStatus();
+		}
+
+		// 플레이어 행동 선택지
+		ShowBattleMenu();
+
+		// 적의 공격 (플레이어가 살아있을 때만)
+		if (Enemy->IsAlive() && player.IsAlive()) 
+		{
+			Enemy->Attack(player);
+		}
+	}
+
+	// 전투 종료 후 상태 전환 및 결과 처리
+	State = GameState::AfterBattle;
+	if (player.IsAlive()) 
+	{
+		EndBattle(true);  // 승리
+	}
+	else 
+	{
+		EndBattle(false); // 패배
+	}
 }
 
 void GameManager::ShowBattleMenu()
 {
+    int Choice = 0;
+    bool ValidInput = false;
+
+    while (!ValidInput) {
+        printf("\n===== 전투 메뉴 =====\n");
+        printf("1. 공격\n");
+        printf("2. 메디카에 사용\n");
+        printf("3. 무기 교체\n");
+        printf("4. 내 정보 보기\n");
+        printf("선택(번호 입력): ");
+
+        std::cin >> Choice;
+
+        if (Choice == 1) {
+            player.Attack(*Enemy);
+            ValidInput = true;
+        }
+        else if (Choice == 2) {
+            UseMedi();
+            ValidInput = true;
+        }
+        else if (Choice == 3) {
+            ChangeWeapon();
+            ValidInput = true;
+        }
+        else if (Choice == 4) {
+            ShowPlayerInfo();
+        }
+        else {
+            printf("올바른 번호를 입력하세요.\n");
+        }
+    }
 }
 
 void GameManager::EndBattle(bool Victory)
 {
+    if (Victory) 
+	{
+        printf("\n전투에서 승리했습니다!\n");
+        GiveLoot(); // 전리품 지급
+        if (IsVictoryConditionMet()) 
+		{
+            GameVictory(); // 게임 클리어
+        } else 
+		{
+            MoveToNextStage(); // 다음 스테이지로 이동
+        }
+    } 
+	else 
+	{
+        printf("\n패배했습니다...\n");
+        GameDefeat(); // 게임 오버 처리
+    }
+
+    ShowAfterBattleMenu(); // 전투 후 선택지 메뉴 호출
 }
 
 void GameManager::ShowAfterBattleMenu()
 {
+    int Choice = 0;
+    bool ExitMenu = false;
+
+    while (!ExitMenu)
+    {
+        printf("\n===== 전투 후 메뉴 =====\n");
+        printf("1. 내 정보 보기\n");
+        printf("2. 메디카에 사용\n");
+        printf("3. 다음 스테이지 진행\n");
+        printf("선택(번호 입력): ");
+
+        std::cin >> Choice;
+
+        if (Choice == 1)
+        {
+            ShowPlayerInfo();
+        }
+        else if (Choice == 2)
+        {
+            UseMedi();
+        }
+        else if (Choice == 3)
+        {
+            ExitMenu = true;
+            MoveToNextStage();
+        }
+        else
+        {
+            printf("올바른 번호를 입력하세요.\n");
+        }
+    }
 }
 
 void GameManager::MoveToNextStage()
 {
+    ++CurrentStage;
+
+    if (CurrentStage > TotalStages)
+    {
+        State = GameState::GameClear;
+        GameVictory();
+        return;
+    }
+
+    InitStage(CurrentStage);
+
+    if (CurrentStage == 3 || CurrentStage == 6 || CurrentStage == 9)
+    {
+        State = GameState::TraderStage;
+        ShowTraderMenu();
+    }
+    else if (CurrentStage == 8)
+    {
+        SetupEnemy(CurrentStage); // 놉 생성
+        State = GameState::InBattle;
+        StartBattle();
+    }
+    else if (CurrentStage == 12)
+    {
+        SetupEnemy(CurrentStage); // 워뽀쓰 생성
+        State = GameState::InBattle;
+        StartBattle();
+    }
+    else
+    {
+        SetupEnemy(CurrentStage); // 일반 적(Boyz) 생성
+        State = GameState::InBattle;
+        StartBattle();
+    }
 }
 
 void GameManager::ShowTraderMenu()
 {
+    int Choice = 0;
+    bool ExitMenu = false;
+
+    printf("\n===== 상인 메뉴 =====\n");
+    printf("상인을 만났습니다. 메디카에(힐템)를 구매할 수 있습니다.\n");
+
+    while (!ExitMenu)
+    {
+        printf("1. 메디카에 구매\n");
+        printf("2. 내 정보 보기\n");
+        printf("3. 다음 스테이지로 이동\n");
+        printf("선택(번호 입력): ");
+
+        std::cin >> Choice;
+
+        if (Choice == 1)
+        {
+            BuyMedi();
+        }
+        else if (Choice == 2)
+        {
+            ShowPlayerInfo();
+        }
+        else if (Choice == 3)
+        {
+            ExitMenu = true;
+            MoveToNextStage();
+        }
+        else
+        {
+            printf("올바른 번호를 입력하세요.\n");
+        }
+    }
 }
 
 void GameManager::ShowPlayerInfo()
 {
-}
-
-void GameManager::ShowEnemyInfo()
-{
+    player.ViewStatus();
 }
 
 void GameManager::ChangeWeapon()
 {
+    player.SwapWeapon();
+    if (player.MyWeapon == WeaponType::Bolter)
+    {
+        printf("무기를 볼터로 교체했습니다.\n");
+    }
+    else if (player.MyWeapon == WeaponType::ChainSword)
+    {
+        printf("무기를 체인소드로 교체했습니다.\n");
+    }
 }
 
 void GameManager::UseMedi()
 {
+    player.UsingMed();
 }
 
 void GameManager::BuyMedi()
 {
+    if (Trader != nullptr)
+    {
+        bool result = player.BuyMed(*Trader);
+    }
+    else
+    {
+        printf("버그인듯\n");
+    }
 }
 
 void GameManager::GameVictory()
 {
+    printf("\n축하합니다! 워뽀쓰를 처치하고 WH40k Malum Caedo를 클리어했습니다!\n");
+    printf("For the Emperor!\n");
+    printf("게임을 종료합니다.\n");
+    exit(0);
 }
 
 void GameManager::GameDefeat()
 {
+    printf("\n플레이어가 사망했습니다...\n");
+    printf("WH40k Malum Caedo - 패배\n");
+    printf("게임을 종료합니다.\n");
+    exit(0);
 }
 
 int GameManager::GetCurrentStage() const
 {
-	return 0;
+    return CurrentStage;
 }
 
 GameState GameManager::GetState() const
 {
-	return GameState();
+	return State;
 }
 
 void GameManager::InitStage(int StageNum)
 {
+    // 이전 적/상인 객체 정리
+    if (Enemy != nullptr)
+    {
+        delete Enemy;
+        Enemy = nullptr;
+    }
+    if (Trader != nullptr)
+    {
+        delete Trader;
+        Trader = nullptr;
+    }
+
+    // 적/상인 배치
+    if (StageNum == 3 || StageNum == 6 || StageNum == 9)
+    {
+        SetupTrader(StageNum);
+    }
+    else
+    {
+        SetupEnemy(StageNum);
+    }
 }
 
 void GameManager::SetupEnemy(int StageNum)
 {
+    // 기존 적 객체 삭제
+    if (Enemy != nullptr)
+    {
+        delete Enemy;
+        Enemy = nullptr;
+    }
+
+    // 스테이지별 적 배치
+    if (StageNum == 8)
+    {
+        // 놉(중간보스) 생성
+        Enemy = new Nob();
+        printf("중간보스 놉이 등장했습니다!\n");
+    }
+    else if (StageNum == 12)
+    {
+        // 워뽀쓰(최종보스) 생성
+        Enemy = new Warboss();
+        printf("최종보스 워뽀쓰가 등장했습니다!\n");
+    }
+    else
+    {
+        // 일반 적(Boyz) 생성
+        Enemy = new Boyz();
+        printf("적 오크 Boyz가 등장했습니다!\n");
+    }
 }
 
 void GameManager::SetupTrader(int StageNum)
 {
-}
+    if (Trader != nullptr)
+    {
+        delete Trader;
+        Trader = nullptr;
+    }
 
-bool GameManager::IsTraderStage(int StageNum) const
-{
-	return false;
-}
-
-bool GameManager::IsBossStage(int StageNum) const
-{
-	return false;
+    Trader = new RougeTrader();
+    // 안내 메시지는 ShowTraderMenu()에서만 출력
 }
 
 bool GameManager::IsVictoryConditionMet() const
 {
-	return false;
+    // 최종 스테이지(12)에서 적 처치 시 클리어
+    return (CurrentStage == 12 && Enemy != nullptr && !Enemy->IsAlive());
 }
 
 void GameManager::GiveLoot()
 {
-}
-
-void GameManager::HandleInput(int MenuChoice)
-{
+    // 상인 스테이지(3, 6, 9)와 12스테이지에서는 OaksHead를 지급하지 않음
+    if (CurrentStage != 12 && CurrentStage != 3 && CurrentStage != 6 && CurrentStage != 9)
+    {
+        player.OaksHead++;
+        printf("전리품: 옼스 머리통 1개를 획득했습니다!\n");
+    }
 }
