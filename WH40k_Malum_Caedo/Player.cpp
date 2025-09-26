@@ -1,6 +1,10 @@
 #include "Player.h"
 #include "RougeTrader.h"
 #include <thread>
+#define GREEN "\x1b[32m"
+#define RESET "\x1b[0m"
+#define YELLOW "\x1b[33m"
+
 
 void Player::UsingMed()
 {
@@ -53,14 +57,14 @@ void Player::ViewStatus() const
 	}
 	else
 	{
-		HealthState = "최상";
+		printf("\nBBBBBBBBBBBBBUUUUUUUUUUUUUUUGGGGGGGGGG\n");
 	}
 
-	printf("\n------ 나의 정보 ------\n이름 : %s\n소지금 : 머리통 %d개\n장착 무기 : %s\n",
+	printf(GREEN "\n------ 나의 정보 ------\n이름 : %s\n소지금 : 머리통 %d개\n장착 무기 : %s\n",
 		Name.c_str(), OaksHead, weaponName);
 	printf("머리 : %d\n몸통 : %d\n오른팔 : %d / 왼팔 : %d\n오른다리 : %d / 왼다리 : %d\n",
 		Head, Thorax, RightArm, LeftArm, RightLeg, LeftLeg);
-	printf("최종 건강 상태 : %s\n\n", HealthState);
+	printf("최종 건강 상태 : %s\n\n" RESET, HealthState);
 }
 
 void Player::SwapWeapon()
@@ -110,7 +114,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 
 	if (DodgeChance == DodgeRoll)
 	{
-		printf("\n공격을 피했습니다!\n\n");
+		printf(YELLOW "\n공격을 피했습니다!\n\n");
 		return;
 	}
 
@@ -122,7 +126,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 			Head = 0; 
 
 		}
-		printf("\n적에게 머리를 맞았습니다!\n머리 체력 : %d / 45 피해량 : %d\n\n", Head, Damage);
+		printf(YELLOW "\n적에게 머리를 맞았습니다!\n머리 체력 : %d / 45 피해량 : %d\n\n", Head, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::Thorax))
 	{
@@ -131,7 +135,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			Thorax = 0; 
 		}
-		printf("\n적에게 몸통을 맞았습니다!\n몸통 체력 : %d / 90 피해량 : %d\n\n", Thorax, Damage);
+		printf(YELLOW "\n적에게 몸통을 맞았습니다!\n몸통 체력 : %d / 90 피해량 : %d\n\n", Thorax, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::RightArm))
 	{
@@ -140,7 +144,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			RightArm = 0; 
 		}
-		printf("\n적에게 오른팔을 맞았습니다!\n오른팔 체력 : %d / 70 피해량 : %d\n\n", RightArm, Damage);
+		printf(YELLOW "\n적에게 오른팔을 맞았습니다!\n오른팔 체력 : %d / 70 피해량 : %d\n\n", RightArm, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::LeftArm))
 	{
@@ -149,7 +153,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			LeftArm = 0; 
 		}
-		printf("\n적에게 왼팔을 맞았습니다!\n왼팔 체력 : %d / 70 피해량 : %d\n\n", LeftArm, Damage);
+		printf(YELLOW "\n적에게 왼팔을 맞았습니다!\n왼팔 체력 : %d / 70 피해량 : %d\n\n", LeftArm, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::RightLeg))
 	{
@@ -158,7 +162,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			RightLeg = 0; 
 		}
-		printf("\n적에게 오른다리를 맞았습니다!\n오른다리 체력 : %d / 70 피해량 : %d\n\n", RightLeg, Damage);
+		printf(YELLOW "\n적에게 오른다리를 맞았습니다!\n오른다리 체력 : %d / 70 피해량 : %d\n\n", RightLeg, Damage);
 	}
 	else if (AttackRollBodyPart == static_cast<int>(BodyPart::LeftLeg))
 	{
@@ -167,7 +171,7 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 		{ 
 			LeftLeg = 0; 
 		}
-		printf("\n적에게 왼다리를 맞았습니다!\n왼다리 체력 : %d / 70 피해량 : %d\n\n", LeftLeg, Damage);
+		printf(YELLOW "\n적에게 왼다리를 맞았습니다!\n왼다리 체력 : %d / 70 피해량 : %d\n\n" RESET, LeftLeg, Damage);
 	}
 	else
 	{

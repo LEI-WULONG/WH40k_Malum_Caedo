@@ -1,4 +1,7 @@
 #include "Nob.h"
+#define RED   "\x1b[31m"
+#define RESET "\x1b[0m"
+
 
 int Nob::Attack(Character& Target)
 {
@@ -48,14 +51,14 @@ void Nob::TakeDamage(int Damage, BodyPart Part)
 
 void Nob::ViewStatus() const
 {
-	printf("------ 적의 체력 ------\n");
+	printf(RED "------ 적의 체력 ------\n");
 	printf("적 이름: %s\n", Name.c_str());
 	printf("머리: %d\n", Head);
 	printf("몸통: %d\n", Thorax);
 	printf("오른팔: %d / ", RightArm);
 	printf("왼팔: %d\n", LeftArm);
 	printf("오른다리: %d / ", RightLeg);
-	printf("왼다리: %d\n\n", LeftLeg);
+	printf("왼다리: %d\n\n" RESET, LeftLeg);
 }
 
 bool Nob::IsAlive() const

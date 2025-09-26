@@ -34,45 +34,45 @@ void GameManager::StartGame()
 	}
 
     printf(YELLOW "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("Mdolllllcccccc::::::;;;;;;,,,,,'''''.cKMMMMMMMMMMMMMMMMMMMMMMNc            .............''',,,,,;;;:oM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("Md.                                .;xNMNXXXNNWMMMMMWNNNNWWMMW0o,                                 .cOM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MW0c,,;;;;::::::;;;;,,,'''.....   ;OWMMXl;;.,ckNMMMMW0o:,,:xXWMMNo.    ..........'',,,;::cccclllldKWMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMWNOlc::;,,''..............    :XMMXd:col;,,'cONKko,.,''cc;lKMMX;    .......         .....'':kNMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMXd'    ..';::c::;;,'..      lNMMNkxXWMNO;  :kc.. 'okKNXkkNMWO.   .''......'',,,,,'...  .:kNMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMXkxkxxdol:;'.     .''..   .l0NWNX0ko::c:cc,cxolc,.,codddo:.     .'',,,'.   ..',,;:cdk0WMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMXo.      ..;ccc;'....    .'''..     :d' .cdl               ...   .';:ccc;..   .oKMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMNk;.':lxxdl;.  .,;.            .. .:,    ,l. ''.         . .'::,.    .;coodoxKWMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMWXNXx:.    'll,. .'. .,... 'c'  ;;      :c..lx,.'. ..  ';.  'ldo;.    .lXMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMWXNXx:.    'll,. .'. .,... 'c'  ;;      :c..lx,.'. ..  ';.  'ldo;.    .lXMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMNOx0Oc.  .ol. .lc .d00x' 'c.        'l' ,OXKl  .c.  .dx,   .lXWWMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMMMMWKo,.ckl. .ld,,dNMMMNOd'          ;xOXWMMXxl:dd.  .dKd;cxKWMMMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMMMMMMMNXNKdc:dX00NMMMMMMWk;          .xWMMMMMMMWWN0xxxONMWMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWx;cc.       ':;dNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNNXx..cc'.     ..c:.l0KKKWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM0c;,. :o:,'. .'..'l0: .''lNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXkc...'k0o,. .:;oKKo..,;ckWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWd'l0kOWMWk..cOKWMWKxdx:,xWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNl.dWMMMMMWOxXMMMMMMMNkc:xWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
     printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n" RESET);
 	printf("\n=== WH40k Malum Caedo ===\n");
 	printf("게임을 시작합니다!\n");
@@ -288,7 +288,7 @@ void GameManager::ShowTraderMenu()
     bool ExitMenu = false;
 
     printf("\n===== 상인 메뉴 =====\n");
-    printf("상인을 만났습니다. 메디카에(힐템)를 구매할 수 있습니다.\n");
+    printf("로그 트레이더를 만났습니다. 메디카에(힐템)를 구매할 수 있습니다.\n");
 
     while (!ExitMenu)
     {
