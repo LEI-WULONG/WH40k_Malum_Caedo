@@ -6,7 +6,7 @@ class RougeTrader; // 전방 선언
 enum class WeaponType
 {
 	Bolter = 1,
-	ChainSword = 1 << 1
+	ChainSword
 };
 
 class Player :

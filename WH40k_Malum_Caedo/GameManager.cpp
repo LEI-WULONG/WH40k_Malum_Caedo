@@ -15,12 +15,9 @@ GameManager::GameManager()
 
 void GameManager::StartGame() 
 {
-	CurrentStage = 1;       
-    // 스테이지 1로 초기화
-	State = GameState::MainMenu;    // 메인 메뉴 상태로 초기화
-
-	// 플레이어 초기화 (필요하다면 이름, 무기 등 추가 설정)
-	player = Player();              // 기본 생성자 사용, 추가 설정 가능
+	CurrentStage = 1;                  // 스테이지 1로 초기화
+	State = GameState::MainMenu;       // 메인 메뉴 상태로 초기화
+    player = Player();	               // 플레이어 초기화
 
 	// 적/상인 포인터 초기화
 	if (Enemy)
@@ -359,7 +356,7 @@ void GameManager::BuyMedi()
 
 void GameManager::GameVictory()
 {
-    printf("\n축하합니다! 워뽀쓰를 처치하고 WH40k Malum Caedo를 클리어했습니다!\n");
+    printf("\n워뽀쓰를 처치하고 WH40k Malum Caedo를 클리어했습니다!\n");
     printf("For the Emperor!\n");
     printf("게임을 종료합니다.\n");
     exit(0);

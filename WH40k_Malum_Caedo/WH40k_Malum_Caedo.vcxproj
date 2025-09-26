@@ -126,12 +126,11 @@
     <ClCompile Include="Boyz.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="WH40k_Malum_Caedo.cpp" />
     <ClCompile Include="Nob.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RougeTrader.cpp" />
     <ClCompile Include="Warboss.cpp" />
-    <ClCompile Include="WH40k_Malum_Caedo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boyz.h" />
@@ -141,7 +140,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="RougeTrader.h" />
     <ClInclude Include="Warboss.h" />
-    <ClInclude Include="WH40k_Malum_Caedo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
