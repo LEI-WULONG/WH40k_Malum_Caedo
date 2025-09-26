@@ -5,6 +5,7 @@
 #include <thread>
 #define YELLOW "\x1b[33m"
 #define RESET "\x1b[0m"
+#define BRIGHT_BLACK   "\x1b[90m"
 
 GameManager::GameManager()
 	: CurrentStage(1),                // 1스테이지로 초기화
@@ -85,11 +86,11 @@ void GameManager::ShowMainMenu()
 	int Choice = 0;
 
 	while (true) {
-		printf("\n===== 메인 메뉴 =====\n");
+		printf(BRIGHT_BLACK "\n===== 메인 메뉴 =====\n");
 		printf("1. 전투 시작\n");
 		printf("2. 내 정보 보기\n");
 		printf("3. 무기 교체 (볼터/체인소드)\n");
-		printf("선택(번호 입력): ");
+		printf("선택(번호 입력): " RESET);
 
 		std::cin >> Choice;
 
@@ -153,12 +154,12 @@ void GameManager::ShowBattleMenu()
     bool ValidInput = false;
 
     while (!ValidInput) {
-        printf("\n===== 전투 메뉴 =====\n");
+        printf(BRIGHT_BLACK "\n===== 전투 메뉴 =====\n");
         printf("1. 공격\n");
         printf("2. 메디카에 사용\n");
         printf("3. 무기 교체\n");
         printf("4. 내 정보 보기\n");
-        printf("선택(번호 입력): ");
+        printf("선택(번호 입력): " RESET);
 
         std::cin >> Choice;
 
@@ -185,7 +186,7 @@ void GameManager::EndBattle(bool Victory)
 {
     if (Victory) 
 	{
-        printf("\n전투에서 승리했습니다!\n");
+        printf(YELLOW "\n전투에서 승리했습니다!\n" RESET);
         GiveLoot(); // 전리품 지급
         if (IsVictoryConditionMet()) 
 		{
@@ -211,12 +212,12 @@ void GameManager::ShowAfterBattleMenu()
 
     while (!ExitMenu)
     {
-        printf("\n===== 전투 후 메뉴 =====\n");
+        printf(BRIGHT_BLACK "\n===== 전투 후 메뉴 =====\n");
         printf("1. 내 정보 보기\n");
         printf("2. 메디카에 사용\n");
         printf("3. 다음 스테이지 진행 (다음 스테이지 : %d)\n", (CurrentStage + 1));
 		printf("4. 무기 교체 (볼터/체인소드)\n");
-        printf("선택(번호 입력): ");
+        printf("선택(번호 입력): " RESET);
     
         std::cin >> Choice;
 
@@ -287,15 +288,15 @@ void GameManager::ShowTraderMenu()
     int Choice = 0;
     bool ExitMenu = false;
 
-    printf("\n===== 상인 메뉴 =====\n");
-    printf("로그 트레이더를 만났습니다. 메디카에(힐템)를 구매할 수 있습니다.\n");
+    printf(BRIGHT_BLACK "\n===== 상인 메뉴 =====\n");
+    printf("로그 트레이더를 만났습니다. 메디카에(힐템)를 구매할 수 있습니다.\n" RESET);
 
     while (!ExitMenu)
     {
-        printf("1. 메디카에 구매\n");
+        printf(BRIGHT_BLACK "1. 메디카에 구매\n");
         printf("2. 내 정보 보기\n");
         printf("3. 다음 스테이지로 이동 (다음 스테이지 : %d)\n", (CurrentStage + 1));
-        printf("선택(번호 입력): ");
+        printf("선택(번호 입력): " RESET);
 
         std::cin >> Choice;
 
@@ -358,6 +359,7 @@ void GameManager::BuyMedi()
 
 void GameManager::GameVictory()
 {
+    printf("====== 승리 ======");
     printf("\n워뽀쓰를 처치하고 WH40k Malum Caedo를 클리어했습니다!\n");
     printf("For the Emperor!\n");
     printf("게임을 종료합니다.\n");
@@ -366,7 +368,7 @@ void GameManager::GameVictory()
 
 void GameManager::GameDefeat()
 {
-    printf("\n플레이어가 사망했습니다...\n");
+    printf(RESET "\n플레이어가 사망했습니다...\n");
     printf("WH40k Malum Caedo - 패배\n");
     printf("게임을 종료합니다.\n");
     exit(0);
@@ -497,6 +499,6 @@ void GameManager::GiveLoot()
     if (CurrentStage != 12 && CurrentStage != 3 && CurrentStage != 6 && CurrentStage != 9)
     {
         player.OaksHead++;
-        printf("전리품: 옼스 머리통 1개를 획득했습니다!\n\n");
+        printf(YELLOW "전리품: 옼스 머리통 1개를 획득했습니다!\n\n" RESET);
     }
 }

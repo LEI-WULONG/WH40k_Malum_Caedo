@@ -187,14 +187,14 @@ int Player::Attack(Character& Target)
 	int TotalDamage = 0;
 	if (MyWeapon == WeaponType::Bolter)
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			int Damage = rand() % 21 + 20;
 			printf("\n탕! %d의 데미지", Damage);
 			int Part = rand() % static_cast<int>(BodyPart::NumParts);
 			Target.TakeDamage(Damage, static_cast<Character::BodyPart>(Part));
 			TotalDamage += Damage;
-			std::this_thread::sleep_for(std::chrono::milliseconds(200)); // 감성
+			std::this_thread::sleep_for(std::chrono::milliseconds(150)); // 감성
 		}
 	}
 	else if (MyWeapon == WeaponType::ChainSword)
@@ -206,7 +206,7 @@ int Player::Attack(Character& Target)
 			printf("\n가가가각! %d의 데미지", Damage);
 			Target.TakeDamage(Damage, static_cast<Character::BodyPart>(Part));
 			TotalDamage += Damage;
-			std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 감성
+			std::this_thread::sleep_for(std::chrono::milliseconds(75)); // 감성
 		}
 	}
 	else
