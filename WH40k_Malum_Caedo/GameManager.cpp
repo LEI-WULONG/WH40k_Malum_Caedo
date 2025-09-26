@@ -3,6 +3,8 @@
 #include "Boyz.h"
 #include "Warboss.h"
 #include <thread>
+#define YELLOW "\x1b[33m"
+#define RESET "\x1b[0m"
 
 GameManager::GameManager()
 	: CurrentStage(1),                // 1스테이지로 초기화
@@ -31,7 +33,7 @@ void GameManager::StartGame()
 		Trader = nullptr;
 	}
 
-    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    printf(YELLOW "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     printf("Mdolllllcccccc::::::;;;;;;,,,,,'''''.cKMMMMMMMMMMMMMMMMMMMMMMNc            .............''',,,,,;;;:oM\n");
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -71,7 +73,7 @@ void GameManager::StartGame()
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNl.dWMMMMMWOxXMMMMMMMNkc:xWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n");
+    printf("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM\n" RESET);
 	printf("\n=== WH40k Malum Caedo ===\n");
 	printf("게임을 시작합니다!\n");
 	ShowMainMenu(); // 첫 선택지(메인 메뉴) 호출
