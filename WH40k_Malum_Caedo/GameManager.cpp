@@ -368,8 +368,8 @@ void GameManager::GameVictory()
 
 void GameManager::GameDefeat()
 {
+    printf("====== 패배 ======");
     printf(RESET "\n플레이어가 사망했습니다...\n");
-    printf("WH40k Malum Caedo - 패배\n");
     printf("게임을 종료합니다.\n");
     exit(0);
 }
