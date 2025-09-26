@@ -2,7 +2,7 @@
 #define RED   "\x1b[31m"
 #define RESET "\x1b[0m"
 
-
+// 옼스 워뽀쓰가 적을 공격합니다.
 int Warboss::Attack(Character& Target)
 {
 	int Damage = rand() % 10 + 35;
@@ -10,6 +10,7 @@ int Warboss::Attack(Character& Target)
 	return Damage;
 }
 
+// 옼스 워뽀쓰가 피해를 받습니다.
 void Warboss::TakeDamage(int Damage, BodyPart Part)
 {
     unsigned int* PartHP = nullptr;
@@ -49,6 +50,7 @@ void Warboss::TakeDamage(int Damage, BodyPart Part)
     }
 }
 
+// 옼스 워뽀쓰가 현재 상태(체력 등)를 출력합니다.
 void Warboss::ViewStatus() const
 {
     printf(RED "------ 적의 체력 ------\n");
@@ -61,6 +63,7 @@ void Warboss::ViewStatus() const
     printf("왼다리: %d\n\n" RESET, LeftLeg);
 }
 
+// 옼스 워뽀쓰가 생존 상태인지 확인합니다.
 bool Warboss::IsAlive() const
 {
     // 머리, 몸통, 두 팔, 두 다리 중 하나라도 사망 조건이면 false

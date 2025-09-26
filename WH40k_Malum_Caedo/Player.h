@@ -14,16 +14,16 @@ class Player :
 {
 public:
 	// 파생 함수
-	void ViewStatus() const override;
-	void TakeDamage(int Damage, BodyPart Part) override;
-	int Attack(Character& Target) override;
-	bool IsAlive() const override;
+	void ViewStatus() const override; // 플레이어의 상태를 출력합니다.
+	void TakeDamage(int Damage, BodyPart Part) override; // 플레이어가 피해를 받습니다.
+	int Attack(Character& Target) override; // 플레이어가 적을 공격합니다.
+	bool IsAlive() const override; // 플레이어가 생존 상태인지 확인합니다.
 	
 	// 고유 함수
-    void UsingMed();
-	void SwapWeapon();
+    void UsingMed(); // 플레이어가 메디카에를 사용합니다.
+	void SwapWeapon(); // 플레이어의 무기를 교체합니다.
 	WeaponType MyWeapon = WeaponType::Bolter;					// 무기 뭐 끼고있냐
-	bool BuyMed(RougeTrader& Trader);	
+	bool BuyMed(RougeTrader& Trader); // 상인에게 메디카에를 구매합니다.
 
 	// 상인 상호작용을 위해 public으로 뺄수밖에 없었음
 	unsigned int Med = 0;					// 메디카에 소지 갯수, 2개가 최대

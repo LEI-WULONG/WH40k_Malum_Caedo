@@ -1,5 +1,6 @@
 #include "RougeTrader.h"
 
+// 플레이어에게 메디카에를 판매합니다.
 bool RougeTrader::SellMed(Player& player)
 {
 	if (player.Med >= 2)

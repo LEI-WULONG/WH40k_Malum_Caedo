@@ -6,6 +6,7 @@
 #define YELLOW "\x1b[33m"
 
 
+// 플레이어가 메디카에를 사용하여 체력을 회복합니다.
 void Player::UsingMed()
 {
 	const int MaxMed = 2;
@@ -31,6 +32,8 @@ void Player::UsingMed()
 	}
 }
 
+
+// 플레이어의 현재 상태(체력, 무기 등)를 출력합니다.
 void Player::ViewStatus() const
 {
 	int PlayerTotalHealth = Head + Thorax + RightArm + LeftArm + RightLeg + LeftLeg;
@@ -67,6 +70,8 @@ void Player::ViewStatus() const
 	printf("최종 건강 상태 : %s\n\n" RESET, HealthState);
 }
 
+
+// 플레이어의 무기를 교체합니다.
 void Player::SwapWeapon()
 {
 	if (MyWeapon == WeaponType::Bolter)
@@ -79,11 +84,15 @@ void Player::SwapWeapon()
 	}
 }
 
+
+// 상인에게 메디카에를 구매합니다.
 bool Player::BuyMed(RougeTrader& Trader)
 {
 	return Trader.SellMed(*this);
 }
 
+
+// 플레이어가 생존 상태인지 확인합니다.
 bool Player::IsAlive() const
 {
 	// 머리, 몸통, 두 팔, 두 다리 중 하나라도 사망 조건이면 false
@@ -106,6 +115,8 @@ bool Player::IsAlive() const
 	return true;
 }
 
+
+// 플레이어가 피해를 받습니다.
 void Player::TakeDamage(int Damage, BodyPart Part)
 {
 	const int DodgeChance = 1;
@@ -182,6 +193,8 @@ void Player::TakeDamage(int Damage, BodyPart Part)
 
 }
 
+
+// 플레이어가 적을 공격합니다.
 int Player::Attack(Character& Target)
 {
 	int TotalDamage = 0;

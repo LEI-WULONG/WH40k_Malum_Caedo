@@ -7,15 +7,14 @@
 #define RESET "\x1b[0m"
 #define BRIGHT_BLACK   "\x1b[90m"
 
+// 게임 매니저 생성자, 초기 상태를 설정합니다.
 GameManager::GameManager()
-	: CurrentStage(1),                // 1스테이지로 초기화
-	State(GameState::MainMenu),     // 메인 메뉴 상태로 초기화
-	Enemy(nullptr),                 // 적 포인터 초기화
-	Trader(nullptr)                 // 상인 포인터 초기화
+	: CurrentStage(1), State(GameState::MainMenu), Enemy(nullptr), Trader(nullptr)
 {
 	printf("[GameManager] : 황제님이 가호하시길.\n");
 }
 
+// 게임을 시작하고 초기화합니다.
 void GameManager::StartGame() 
 {
 	CurrentStage = 1;                  // 스테이지 1로 초기화
@@ -80,6 +79,7 @@ void GameManager::StartGame()
 	ShowMainMenu(); // 첫 선택지(메인 메뉴) 호출
 }
 
+// 메인 메뉴를 출력하고 입력을 처리합니다.
 void GameManager::ShowMainMenu() 
 {
 	State = GameState::MainMenu;
@@ -111,7 +111,7 @@ void GameManager::ShowMainMenu()
 	}
 }
 
-
+// 전투를 시작하고 전투 루프를 실행합니다.
 void GameManager::StartBattle()
 {
 	State = GameState::InBattle;
@@ -148,6 +148,7 @@ void GameManager::StartBattle()
 	}
 }
 
+// 전투 중 플레이어 행동 메뉴를 출력합니다.
 void GameManager::ShowBattleMenu()
 {
     int Choice = 0;
@@ -182,6 +183,7 @@ void GameManager::ShowBattleMenu()
     }
 }
 
+// 전투 종료 후 결과를 처리합니다.
 void GameManager::EndBattle(bool Victory)
 {
     if (Victory) 
@@ -205,6 +207,7 @@ void GameManager::EndBattle(bool Victory)
     
 }
 
+// 전투 후 선택 메뉴를 출력합니다.
 void GameManager::ShowAfterBattleMenu()
 {
     int Choice = 0;
@@ -245,6 +248,7 @@ void GameManager::ShowAfterBattleMenu()
     }
 }
 
+// 다음 스테이지로 이동하고 적/상인/보스 배치합니다.
 void GameManager::MoveToNextStage()
 {
     ++CurrentStage;
@@ -283,6 +287,7 @@ void GameManager::MoveToNextStage()
     }
 }
 
+// 상인 메뉴를 출력하고 입력을 처리합니다.
 void GameManager::ShowTraderMenu()
 {
     int Choice = 0;
@@ -320,11 +325,13 @@ void GameManager::ShowTraderMenu()
     }
 }
 
+// 플레이어 정보를 출력합니다.
 void GameManager::ShowPlayerInfo()
 {
     player.ViewStatus();
 }
 
+// 플레이어의 무기를 교체합니다.
 void GameManager::ChangeWeapon()
 {
     player.SwapWeapon();
@@ -340,11 +347,13 @@ void GameManager::ChangeWeapon()
     }
 }
 
+// 플레이어가 메디카에를 사용합니다.
 void GameManager::UseMedi()
 {
     player.UsingMed();
 }
 
+// 플레이어가 메디카에를 구매합니다.
 void GameManager::BuyMedi()
 {
     if (Trader != nullptr)
@@ -357,6 +366,7 @@ void GameManager::BuyMedi()
     }
 }
 
+// 게임 클리어 시 메시지를 출력하고 종료합니다.
 void GameManager::GameVictory()
 {
     printf("====== 승리 ======");
@@ -366,6 +376,7 @@ void GameManager::GameVictory()
     exit(0);
 }
 
+// 게임 오버 시 메시지를 출력하고 종료합니다.
 void GameManager::GameDefeat()
 {
     printf("====== 패배 ======");
@@ -374,16 +385,19 @@ void GameManager::GameDefeat()
     exit(0);
 }
 
+// 현재 스테이지 번호를 반환합니다.
 int GameManager::GetCurrentStage() const
 {
-    return CurrentStage;
+	return CurrentStage;
 }
 
+// 현재 게임 상태를 반환합니다.
 GameState GameManager::GetState() const
 {
 	return State;
 }
 
+// 스테이지에 맞게 적 또는 상인을 배치합니다.
 void GameManager::InitStage(int StageNum)
 {
     // 이전 적/상인 객체 정리
@@ -409,6 +423,7 @@ void GameManager::InitStage(int StageNum)
     }
 }
 
+// 스테이지에 맞는 적을 생성하고 등장 메시지를 출력합니다.
 void GameManager::SetupEnemy(int StageNum)
 {
     if (Enemy != nullptr)
@@ -475,6 +490,7 @@ void GameManager::SetupEnemy(int StageNum)
     }
 }
 
+// 상인을 생성합니다.
 void GameManager::SetupTrader(int StageNum)
 {
     if (Trader != nullptr)
@@ -487,12 +503,13 @@ void GameManager::SetupTrader(int StageNum)
     // 안내 메시지는 ShowTraderMenu()에서만 출력
 }
 
+// 게임 클리어 조건을 확인합니다.
 bool GameManager::IsVictoryConditionMet() const
 {
-    // 최종 스테이지(12)에서 적 처치 시 클리어
-    return (CurrentStage == 12 && Enemy != nullptr && !Enemy->IsAlive());
+	return (CurrentStage == 12 && Enemy != nullptr && !Enemy->IsAlive());
 }
 
+// 전리품(머리통)을 지급합니다.
 void GameManager::GiveLoot()
 {
     // 상인 스테이지(3, 6, 9)와 12스테이지에서는 OaksHead를 지급하지 않음

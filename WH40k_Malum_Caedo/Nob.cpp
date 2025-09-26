@@ -2,7 +2,7 @@
 #define RED   "\x1b[31m"
 #define RESET "\x1b[0m"
 
-
+// 놉이 적을 공격합니다.
 int Nob::Attack(Character& Target)
 {
 	int Damage = rand() % 11 + 25;
@@ -10,6 +10,7 @@ int Nob::Attack(Character& Target)
 	return Damage;
 }
 
+// 놉이 피해를 받습니다.
 void Nob::TakeDamage(int Damage, BodyPart Part)
 {
 	unsigned int* PartHP = nullptr;
@@ -49,6 +50,7 @@ void Nob::TakeDamage(int Damage, BodyPart Part)
 	}
 }
 
+// 놉의 현재 상태(체력 등)를 출력합니다.
 void Nob::ViewStatus() const
 {
 	printf(RED "------ 적의 체력 ------\n");
@@ -61,6 +63,7 @@ void Nob::ViewStatus() const
 	printf("왼다리: %d\n\n" RESET, LeftLeg);
 }
 
+// 놉이 생존 상태인지 확인합니다.
 bool Nob::IsAlive() const
 {
 	// 머리, 몸통, 두 팔, 두 다리 중 하나라도 사망 조건이면 false
